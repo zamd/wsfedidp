@@ -1,0 +1,17 @@
+{
+  "name": "wsfedidp2",
+  "version": "1.0.0",
+  "description": "WS-Federation Idp with client-cert authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zulfiqar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "passport": "^0.3.2",
+    "passport-client-cert": "^1.1.0",
+    "wsfed": "^3.1.1"
+  }
+}
