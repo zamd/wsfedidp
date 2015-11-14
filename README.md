@@ -7,4 +7,4 @@ This metadata endpoint can be used to connect this Idp with Auth0 serivce using 
 
 The following diagram captures the authentication request flow.
 
-![Authentication request flow](https://github.com/zamd/wsfedidp/docs/requestflow.png)
+![Authentication request flow](https://github.com/zamd/wsfedidp/blob/master/docs/requestflow.png)
