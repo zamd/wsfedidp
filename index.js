@@ -21,6 +21,11 @@ app.get('/wsfed',
                     }
         }));
 
+app.get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml', wsfed.metadata({
+  issuer:   'http://zamd.net',
+  cert:     fs.readFileSync('./certs/localhost.pem')
+}));
+
 
 function validateCert(clientCert,done){	
 		//TODO: authorize/validate certificate here...
