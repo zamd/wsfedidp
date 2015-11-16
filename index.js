@@ -1,31 +1,24 @@
 var express = require('express'),
-	https = require('https'),
-	fs = require('fs'),
-	passport = require('passport'),
-	wsfed = require('wsfed');
-	
-var ClientCredAuth = require('passport-client-cert').Strategy;
+app = express(),
+fs = require('fs'),
+https = require('https'),
+simpleIdp = require('./simpleIdp');
 
-var app = express();
-app.use(passport.initialize());
-passport.use(new ClientCredAuth(validateCert));
-
-app.get('/wsfed',
-        passport.authenticate('client-cert',{session: false}),
-        wsfed.auth({
-        issuer: 'http://zamd.net',
-        cert:    fs.readFileSync('./certs/localhost.pem'),
-        key:     fs.readFileSync('./certs/localhost.key'),
-        getPostURL: function (wtrealm, wreply, req, callback) { 
-                      return callback( null, 'https://zulfiqar.eu.auth0.com/login/callback')
-                    }
-        }));
-
-app.get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml', wsfed.metadata({
-  issuer:   'http://zamd.net',
-  cert:     fs.readFileSync('./certs/localhost.pem')
-}));
-
+var wsFedOptions = {
+  useClientCertAuth: true,
+  validationCallback: validateCert,
+  
+  issuer: 'http://zamd.net',
+  cert:    fs.readFileSync('./certs/localhost.pem'),
+  key:     fs.readFileSync('./certs/localhost.key'),
+  getPostURL: 
+  function (wtrealm, wreply, req, callback) 
+    {
+     return callback( null, 'https://zulfiqar.eu.auth0.com/login/callback')
+    }
+  };
+                
+app.use('/wsfed',simpleIdp.WSFed(wsFedOptions));
 
 function validateCert(clientCert,done){	
 		//TODO: authorize/validate certificate here...
@@ -35,7 +28,7 @@ function validateCert(clientCert,done){
     });
 }
 
-var opts = {
+var sslOptions = {
   key: fs.readFileSync('./certs/localhost.key'),
   cert: fs.readFileSync('./certs/localhost.pem'),
   ca: fs.readFileSync('./certs/InteliticsCA.pem'),
@@ -43,4 +36,4 @@ var opts = {
   rejectUnauthorized: false
 };
 
-https.createServer(opts,app).listen(5000);
+https.createServer(sslOptions,app).listen(5000);
