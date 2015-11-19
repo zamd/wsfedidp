@@ -81,7 +81,7 @@ emailAddress                    = Email Address
 countryName_default             = GB
 stateOrProvinceName_default     = England
 localityName_default            =
-0.organizationName_default      = Alice Ltd
+0.organizationName_default      = Fabrikam Ltd
 organizationalUnitName_default  =
 emailAddress_default            =
 
