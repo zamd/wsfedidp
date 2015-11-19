@@ -86,26 +86,26 @@ https://fabrikam.net:4443/wsfed/FederationMetadata/2007-06/FederationMetadata.xm
 Setting up Auth0
 ---------------------------
 - Login to Auth0 (or Sign up for trial) and open **Apps/Api** page from the left-hand menu
-![Auth0 Dashboard](https://github.com/zamd/wsfedidp/blob/master/docs/auth0dash.png)
+![Auth0 Dashboard](https://github.com/zamd/wsfedidp/blob/master/images/auth0dash.png)
 - Create a new app or select the existing "Default App" and switch to "Quick Start" tab
 - Select **Regular Web Application** and then choose **Node.js** type and download the Seed Application
 
-![Auth0 Seed Project](https://github.com/zamd/wsfedidp/blob/master/docs/auth0seedproject.png)
+![Auth0 Seed Project](https://github.com/zamd/wsfedidp/blob/master/images/auth0seedproject.png)
 
 - From the left-menu, Click on Connections --> Enterprise and add a new connection for **ADFS**
 
-![Auth0 Enterprise connections](https://github.com/zamd/wsfedidp/blob/master/docs/auth0adfscon.png)
+![Auth0 Enterprise connections](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfscon.png)
 
 - Specify details for the new connection and upload your Idp's Federation Metadata file into you connection settings
 
-![connections settings](https://github.com/zamd/wsfedidp/blob/master/docs/auth0adfsconset.png)
-![connections settings](https://github.com/zamd/wsfedidp/blob/master/docs/auth0adfsconset2.png)
-![connections settings](https://github.com/zamd/wsfedidp/blob/master/docs/auth0adfsconset3.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfsconset.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfsconset2.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfsconset3.png)
 
 - Copy the Endpoint URL from **Connect ADFS with Auth0** page and set it as the **auth0CallbackUrl** value in settings.json file in your Idp directory
 
 - Enable this new connection for your app in **app settings**
-![connections settings](https://github.com/zamd/wsfedidp/blob/master/docs/auth0connectionenabledapp.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0connectionenabledapp.png)
 
 Running the application
 -----------------------------
@@ -129,4 +129,4 @@ Request Flow
 
 The following diagram captures the authentication request flow between sample application, WSFed Idp & Auth0...
 
-![Authentication request flow](https://github.com/zamd/wsfedidp/blob/master/docs/requestflow.png)
+![Authentication request flow](https://github.com/zamd/wsfedidp/blob/master/images/requestflow.png)
