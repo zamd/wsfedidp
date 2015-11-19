@@ -1,30 +1,39 @@
 var express = require('express'),
-	https = require('https'),
-	fs = require('fs'),
-	passport = require('passport'),
-	wsfed = require('wsfed');
-	
-var ClientCredAuth = require('passport-client-cert').Strategy;
+app = express(),
+fs = require('fs'),
+https = require('https'),
+nconf = require('nconf'),
+simpleIdp = require('./simpleIdp');
 
-var app = express();
-app.use(passport.initialize());
-passport.use(new ClientCredAuth(validateCert));
+var settings = nconf.file({file: './config/settings.json'}).get();
 
-app.get('/wsfed',
-        passport.authenticate('client-cert',{session: false}),
-        wsfed.auth({
-        issuer: 'http://zamd.net',
-        cert:    fs.readFileSync('./certs/localhost.pem'),
-        key:     fs.readFileSync('./certs/localhost.key'),
-        getPostURL: function (wtrealm, wreply, req, callback) { 
-                      return callback( null, 'https://zulfiqar.eu.auth0.com/login/callback')
-                    }
-        }));
+var wsFedOptions = {
+  useClientCertAuth: true,
+  validationCallback: validateCert,  
+  issuer: settings.issuerName,
+  cert:   fs.readFileSync(settings.sslCert),
+  key:     fs.readFileSync(settings.sslCertKey),
+  getPostURL: function (wtrealm, wreply, req, callback){
+      return callback( null, settings.auth0CallbackUrl);
+    }
+  };
+                
+app.use('/wsfed',simpleIdp.WSFed(wsFedOptions));
 
-app.get('/wsfed/FederationMetadata/2007-06/FederationMetadata.xml', wsfed.metadata({
-  issuer:   'http://zamd.net',
-  cert:     fs.readFileSync('./certs/localhost.pem')
-}));
+var sslOptions = {
+  cert: fs.readFileSync(settings.sslCert),
+  key: fs.readFileSync(settings.sslCertKey),
+  ca: fs.readFileSync(settings.caCert),
+  
+  requestCert: true,
+  rejectUnauthorized: false
+};
+
+var server =
+https.createServer(sslOptions,app)
+     .listen(settings.sslPort || 4443,function(){
+    console.log("Started on port %j ...", server.address().port);
+});
 
 
 function validateCert(clientCert,done){	
@@ -34,13 +43,3 @@ function validateCert(clientCert,done){
       displayName: clientCert.subject.CN
     });
 }
-
-var opts = {
-  key: fs.readFileSync('./certs/localhost.key'),
-  cert: fs.readFileSync('./certs/localhost.pem'),
-  ca: fs.readFileSync('./certs/InteliticsCA.pem'),
-  requestCert: true,
-  rejectUnauthorized: false
-};
-
-https.createServer(opts,app).listen(5000);

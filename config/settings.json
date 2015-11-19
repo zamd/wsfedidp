@@ -1,0 +1,9 @@
+{
+	"sslCert": "fabrikam.net.cer",
+	"sslCertKey": "fabrikam.net.key",
+	"caCert": "FabrikamRootCA.cer",
+	
+	"issuerName": "http://fabrikam.net",
+	"auth0CallbackUrl": "https://YOUR-AUTH0-NAMESPACE.eu.auth0.com/login/callback",
+	"listenPort": 4443
+}
