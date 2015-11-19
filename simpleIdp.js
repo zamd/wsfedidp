@@ -24,7 +24,3 @@ exports.WSFed = function(options){
 
 	return router;
 }
-
-exports.SamlP = function(options){
-
-}
