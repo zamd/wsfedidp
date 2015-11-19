@@ -124,7 +124,9 @@ npm install
 npm start
 ```
 - Browse to **http://localhost:3000** to run authentication flow
-
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0fedworking.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0fedworking2.png)
+![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0fedworking3.png)
 Request Flow
 ============
 
