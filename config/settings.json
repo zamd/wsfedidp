@@ -1,0 +1,9 @@
+{
+	"sslCert": "./certs/localhost.pem",
+	"sslCertKey": "./certs/localhost.key",
+	"caCert": "./certs/InteliticsCA.pem",
+	
+	"issuerName": "http://zamd.net",
+	"auth0CallbackUrl": "https://zulfiqar.eu.auth0.com/login/callback",
+	"listenPort": 4443
+}
