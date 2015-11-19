@@ -106,6 +106,7 @@ Setting up Auth0
 
 - Enable this new connection for your app in **app settings**
 ![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0connectionenabledapp.png)
+- On the Settings tab, add **http://localhost:3000/callback** to 'Allowed Callback URLs' textbox
 
 Running the application
 -----------------------------
