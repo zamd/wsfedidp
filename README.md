@@ -38,7 +38,7 @@ openssl genrsa -out fabrikam.net.key 2048
 ```
 Create a new Certificate Signing Request (CSR), using idp website key, to be sent to FabrikamRootCA to sign & issue a website SSL certificate 
 ####Cerficate Signing Request (CSR)####
-In the following step, make sure to enter 'Common Name' same the domain name. For example, **fabrikam.net**
+In the following step, make sure to enter 'Common Name' same as the domain name. For example, **fabrikam.net**
 ```
 openssl req -new -key fabrikam.net.key -out fabrikam.net.csr -config openssl.cnfg -extensions server_cert -days 365 -sha256
 ```
@@ -71,7 +71,7 @@ Import the pfx file into your personal certificate store (login in Mac keychain)
 
 Import the CA certificate (**FabrikamRootCA.cer**) into Trusted Root Certificate Authorities (System Roots on Mac) folder in your cert store. 
 
-If you are on MAC, you can also use following command to import CA certificate into 'trusted root certificate store' (thanks @sandrinodimattia)
+If you are on MAC, you can also use following command to import CA certificate into 'trusted root certificate store'. **Thanks Sandrino(@sandrinodimattia)**
 
 ```
 sudo security add-trusted-cert -d -r trustRoot -k "/Library/Keychains/System.keychain" ./FabrikamRootCA.cer
