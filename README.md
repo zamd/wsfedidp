@@ -118,7 +118,7 @@ Setting up Auth0
 
 ![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfsconset2.PNG)
 
-- Copy the Endpoint URL from **Connect ADFS with Auth0** page and set it as the **auth0CallbackUrl** value in settings.json file in your Idp directory
+- Copy the Endpoint URL from **Connect ADFS with Auth0** page and set it as the **auth0CallbackUrl** value in [settings.json](/config/settings.json) file in your Idp directory
 
 ![connections settings](https://github.com/zamd/wsfedidp/blob/master/images/auth0adfsconset3.PNG)
 
