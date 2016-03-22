@@ -62,13 +62,16 @@ openssl req -new -key jon.key -out jon.csr -config openssl.cnfg -extensions usr_
 openssl x509 -req -in jon.csr -CA FabrikamRootCA.cer -CAkey FabrikamRootCA.key -CAcreateserial  -out jon.cer -extfile openssl.cnfg -extensions usr_cert -sha256
 ```
 #### PKCS12####
-Convert jon.key & jon.cer into pkcs12 (pfx) format
+Convert jon.key & jon.cer into pkcs12 (pfx) format by running following command. Choose a password to protect the private key. You would need this password when importing the certficate later on.
 
 ```
 openssl pkcs12 -export -out jon.pfx -inkey jon.key -in jon.cer -certfile FabrikamRootCA.cer
 ```
 Import the pfx file into your personal certificate store (login in Mac keychain).
-
+On Mac, you can run following command. Substitue `<PWD>` with your private key password.
+```
+security import jon.pfx -k ~/Library/Keychains/login.keychain -P <PWD>
+```
 Import the CA certificate (**FabrikamRootCA.cer**) into Trusted Root Certificate Authorities (System Roots on Mac) folder in your cert store. 
 
 If you are on MAC, you can also use following command to import CA certificate into 'trusted root certificate store'. **Thanks Sandrino(@sandrinodimattia)**
