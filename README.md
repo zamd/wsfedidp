@@ -27,17 +27,17 @@ Setting up certificates
 When running the commands below - they will pick up default values from **openssl.cnfg** file. You can chnage the default values in **openssl.cnfg** to suit your scenario. 
 I have used 'Fabrikam Ltd' as the 'Organization Name' and 'Jon Smith' as employee.
 
-####Generate a root CA certificate####
+#### Generate a root CA certificate ####
 ```
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout FabrikamRootCA.key -out FabrikamRootCA.cer -config openssl.cnfg -extensions v3_ca -sha256
 ```
 
-####Generate a new RSA key pair for Idp website####
+#### Generate a new RSA key pair for Idp website ####
 ```
 openssl genrsa -out fabrikam.net.key 2048
 ```
 Create a new Certificate Signing Request (CSR), using idp website key, to be sent to FabrikamRootCA to sign & issue a website SSL certificate 
-####Cerficate Signing Request (CSR)####
+#### Cerficate Signing Request (CSR) ####
 In the following step, make sure to enter 'Common Name' same as the domain name. For example, **fabrikam.net**
 ```
 openssl req -new -key fabrikam.net.key -out fabrikam.net.csr -config openssl.cnfg -extensions server_cert -days 365 -sha256
@@ -52,16 +52,16 @@ Now repeat the same steps to generate an SSL client certificate for jon@fabrikam
 ```
 openssl genrsa -out jon.key 2048
 ```
-####Cerficate Signing Request (CSR)####
+#### Cerficate Signing Request (CSR) ####
 In the following step, enter employee name (Jon Smith) as the 'Common Name'
 ```
 openssl req -new -key jon.key -out jon.csr -config openssl.cnfg -extensions usr_cert -days 365 -sha256
 ```
-####Generate a user certificate####
+#### Generate a user certificate ####
 ```
 openssl x509 -req -in jon.csr -CA FabrikamRootCA.cer -CAkey FabrikamRootCA.key -CAcreateserial  -out jon.cer -extfile openssl.cnfg -extensions usr_cert -sha256
 ```
-#### PKCS12####
+#### PKCS12 ####
 Convert jon.key & jon.cer into pkcs12 (pfx) format by running following command. Choose a password to protect the private key. You would need this password when importing the certficate later on.
 
 ```
